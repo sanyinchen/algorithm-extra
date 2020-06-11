@@ -14,10 +14,10 @@ import sort.common.Util;
  * @since 20-6-11
  */
 
-class Selection implements CompareStrategy<Integer> {
+class Selection<T> implements CompareStrategy<T> {
 
     @Override
-    public CompareAble<Integer>[] sort(CompareAble<Integer>[] a) {
+    public CompareAble<T>[] sort(CompareAble<T>[] a) {
         if (a == null || a.length == 0) {
             return null;
         }

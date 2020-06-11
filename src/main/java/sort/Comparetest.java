@@ -14,7 +14,7 @@ import sort.common.Util;
 
 class Comparetest {
 
-    static class TestCompareBean implements CompareAble<Integer> {
+    static class TestCompareBean implements CompareAble<TestCompareBean> {
 
         public int index;
         public int value;
@@ -25,18 +25,18 @@ class Comparetest {
         }
 
         @Override
-        public int compareTo(CompareAble<Integer> c) {
+        public int compareTo(CompareAble<TestCompareBean> c) {
 
-//            if (this.value - c.getValue() == 0) {
-//                return this.index - ((TestCompareBean) c).index;
-//            }
+            if (this.value - c.getValue().value == 0) {
+                return this.index - c.getValue().index;
+            }
 
-            return this.value - c.getValue();
+            return this.value - c.getValue().value;
         }
 
         @Override
-        public Integer getValue() {
-            return value;
+        public TestCompareBean getValue() {
+            return this;
         }
 
         @Override
@@ -53,15 +53,15 @@ class Comparetest {
             testInputs[i] = new TestCompareBean(i, (int) (Math.random() * 10000));
         }
         long local = System.currentTimeMillis();
-        Util.show(Util.sort(testInputs, new Selection()));
+        Util.show(Util.sort(testInputs, new Selection<>()));
         System.out.println("Selection:" + (System.currentTimeMillis() - local) + "ms");
 
         local = System.currentTimeMillis();
-        Util.show(Util.sort(testInputs, new Insertion()));
+        Util.show(Util.sort(testInputs, new Insertion<>()));
         System.out.println("Insertion:" + (System.currentTimeMillis() - local) + "ms");
 
         local = System.currentTimeMillis();
-        Util.show(Util.sort(testInputs, new Shell()));
+        Util.show(Util.sort(testInputs, new Shell<>()));
         System.out.println("Shell:" + (System.currentTimeMillis() - local) + "ms");
 
     }
