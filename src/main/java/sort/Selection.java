@@ -2,7 +2,7 @@ package sort;
 
 import sort.common.CompareAble;
 import sort.common.CompareStrategy;
-import sort.common.Util;
+import sort.common.CompareUtils;
 
 /**
  * Created by sanyinchen on 20-6-11.
@@ -24,7 +24,7 @@ class Selection<T> implements CompareStrategy<T> {
         for (int i = 0; i < a.length; i++) {
             for (int j = i + 1; j < a.length; j++) {
                 if (a[i].compareTo(a[j]) > 0) {
-                    Util.exch(a, i, j);
+                    CompareUtils.exch(a, i, j);
                 }
             }
         }

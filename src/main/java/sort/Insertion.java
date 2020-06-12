@@ -2,7 +2,7 @@ package sort;
 
 import sort.common.CompareAble;
 import sort.common.CompareStrategy;
-import sort.common.Util;
+import sort.common.CompareUtils;
 
 /**
  * Created by sanyinchen on 20-6-11.
@@ -22,7 +22,7 @@ class Insertion<T> implements CompareStrategy<T> {
         }
         for (int i = 1; i < a.length; i++) {
             for (int j = i; j > 0 && a[j].compareTo(a[j - 1]) <= 0; j--) {
-                Util.exch(a, j - 1, j);
+                CompareUtils.exch(a, j - 1, j);
             }
         }
 

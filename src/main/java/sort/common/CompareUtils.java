@@ -8,7 +8,7 @@ package sort.common;
  * @since 20-6-11
  */
 
-public class Util {
+public class CompareUtils {
 
 
     /**
@@ -55,5 +55,36 @@ public class Util {
             throw new RuntimeException("not sorted!!");
         }
         return sorted;
+    }
+
+    public static <T> void merge(CompareAble<T>[] a, int start, int end, CompareAble<T>[] cache) {
+        merge(a, start, (end + start) >>> 1, end, cache);
+    }
+
+    public static <T> void merge(CompareAble<T>[] a, int start, int mid, int end, CompareAble<T>[] cache) {
+        if (cache == null || start >= cache.length || end >= cache.length) {
+            return;
+        }
+        for (int i = start; i <= end; i++) {
+            cache[i] = a[i];
+        }
+        for (int k = start, i = start, j = mid + 1; k <= end; k++) {
+            // 左侧低位耗尽
+            if (i > mid) {
+                a[k] = cache[j++];
+                continue;
+            }
+            // 右侧高位耗尽
+            if (j > end) {
+                a[k] = cache[i++];
+                continue;
+            }
+            if (cache[j].compareTo(cache[i]) > 0) {
+                a[k] = cache[i++];
+                continue;
+            }
+            a[k] = cache[j++];
+
+        }
     }
 }

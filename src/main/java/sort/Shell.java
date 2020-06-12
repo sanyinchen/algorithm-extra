@@ -2,7 +2,7 @@ package sort;
 
 import sort.common.CompareAble;
 import sort.common.CompareStrategy;
-import sort.common.Util;
+import sort.common.CompareUtils;
 
 /**
  * Created by sanyinchen on 20-6-11.
@@ -23,8 +23,10 @@ class Shell<T> implements CompareStrategy<T> {
             step = 3 * step + 1;
         }
         while (step >= 1) {
-            for (int i = step; i > 0 && a[i].compareTo(a[i - step]) < 0; i -= step) {
-                Util.exch(a, i, i - step);
+            for (int j = step; j < a.length; j++) {
+                for (int i = j; i >= step && a[i].compareTo(a[Math.max(i - step, 0)]) < 0; i -= step) {
+                    CompareUtils.exch(a, i, Math.max(i - step, 0));
+                }
             }
             step /= 3;
         }

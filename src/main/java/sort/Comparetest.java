@@ -1,8 +1,10 @@
 package sort;
 
 
+import java.util.Arrays;
+
 import sort.common.CompareAble;
-import sort.common.Util;
+import sort.common.CompareUtils;
 
 /**
  * Created by sanyinchen on 20-6-11.
@@ -27,9 +29,9 @@ class Comparetest {
         @Override
         public int compareTo(CompareAble<TestCompareBean> c) {
 
-            if (this.value - c.getValue().value == 0) {
-                return this.index - c.getValue().index;
-            }
+//            if (this.value - c.getValue().value == 0) {
+//                return this.index - c.getValue().index;
+//            }
 
             return this.value - c.getValue().value;
         }
@@ -48,21 +50,33 @@ class Comparetest {
 
     public static void main(String[] args) {
         int len = 10000;
-        TestCompareBean[] testInputs = new TestCompareBean[len];
+        TestCompareBean[] testInputs = new TestCompareBean[len + 2];
         for (int i = 0; i < len; i++) {
-            testInputs[i] = new TestCompareBean(i, (int) (Math.random() * 10000));
+            testInputs[i] = new TestCompareBean(i, (int) (Math.random() * 1000));
         }
+        testInputs[len] = new TestCompareBean(len, 0);
+        testInputs[len + 1] = new TestCompareBean(len + 1, 0);
+
+
         long local = System.currentTimeMillis();
-        Util.show(Util.sort(testInputs, new Selection<>()));
+        CompareUtils.show(CompareUtils.sort(Arrays.copyOf(testInputs, testInputs.length), new Selection<>()));
         System.out.println("Selection:" + (System.currentTimeMillis() - local) + "ms");
 
         local = System.currentTimeMillis();
-        Util.show(Util.sort(testInputs, new Insertion<>()));
+        CompareUtils.show(CompareUtils.sort(Arrays.copyOf(testInputs, testInputs.length), new Insertion<>()));
         System.out.println("Insertion:" + (System.currentTimeMillis() - local) + "ms");
 
         local = System.currentTimeMillis();
-        Util.show(Util.sort(testInputs, new Shell<>()));
+        CompareUtils.show(CompareUtils.sort(Arrays.copyOf(testInputs, testInputs.length), new Shell<>()));
         System.out.println("Shell:" + (System.currentTimeMillis() - local) + "ms");
+
+        local = System.currentTimeMillis();
+        CompareUtils.show(CompareUtils.sort(Arrays.copyOf(testInputs, testInputs.length), new Merge<>()));
+        System.out.println("Merge:" + (System.currentTimeMillis() - local) + "ms");
+
+        local = System.currentTimeMillis();
+        CompareUtils.show(CompareUtils.sort(Arrays.copyOf(testInputs, testInputs.length), new MergeBU<>()));
+        System.out.println("MergeBU:" + (System.currentTimeMillis() - local) + "ms");
 
     }
 }
