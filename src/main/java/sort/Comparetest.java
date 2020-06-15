@@ -78,5 +78,9 @@ class Comparetest {
         CompareUtils.show(CompareUtils.sort(Arrays.copyOf(testInputs, testInputs.length), new MergeBU<>()));
         System.out.println("MergeBU:" + (System.currentTimeMillis() - local) + "ms");
 
+        local = System.currentTimeMillis();
+        CompareUtils.show(CompareUtils.sort(Arrays.copyOf(testInputs, testInputs.length), new Quick<>()));
+        System.out.println("Quick:" + (System.currentTimeMillis() - local) + "ms");
+
     }
 }
