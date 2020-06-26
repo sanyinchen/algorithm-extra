@@ -82,5 +82,9 @@ class Comparetest {
         CompareUtils.show(CompareUtils.sort(Arrays.copyOf(testInputs, testInputs.length), new Quick<>()));
         System.out.println("Quick:" + (System.currentTimeMillis() - local) + "ms");
 
+        local = System.currentTimeMillis();
+        CompareUtils.show(CompareUtils.sort(Arrays.copyOf(testInputs, testInputs.length), new MaxPQ<>()));
+        System.out.println("MaxPQ:" + (System.currentTimeMillis() - local) + "ms");
+
     }
 }

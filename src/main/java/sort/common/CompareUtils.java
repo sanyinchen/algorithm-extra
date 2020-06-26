@@ -52,6 +52,7 @@ public class CompareUtils {
     public static <T> CompareAble<T>[] sort(CompareAble<T>[] a, CompareStrategy<T> strategy) {
         CompareAble<T>[] sorted = strategy.sort(a);
         if (!isSorted(sorted)) {
+            show(sorted);
             throw new RuntimeException("not sorted!!");
         }
         return sorted;
